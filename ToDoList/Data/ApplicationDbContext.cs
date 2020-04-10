@@ -14,15 +14,15 @@ namespace ToDoList.Data
         {
         }
 
-        public DbSet<List> Lists { get; set; }
-        public DbSet<Task> Tasks { get; set; }
+        public DbSet<TDList> TDLists { get; set; }
+        public DbSet<TDTask> TDTasks { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<List>() //Dependent entity
-                        .HasOne<Task>() //Parent Entity
+            modelBuilder.Entity<TDList>() //Dependent entity
+                        .HasOne<TDTask>() //Parent Entity
                         .WithMany()
                         .HasForeignKey(task => task.TaskId); //The foreign key that you want to set up as from the Task.cs class
         }

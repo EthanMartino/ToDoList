@@ -9,7 +9,7 @@ namespace ToDoList.Models
     /// <summary>
     /// Represents a complete ToDo List
     /// </summary>
-    public class List
+    public class TDList
     {
         /// <summary>
         /// Unique id for the todo list

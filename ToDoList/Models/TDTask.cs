@@ -9,7 +9,7 @@ namespace ToDoList
     /// <summary>
     /// Represents a single Task in a ToDoList
     /// </summary>
-    public class Task
+    public class TDTask
     {
         [Key, Required]
         /// <summary>

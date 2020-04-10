@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ToDoList.Data;
 
-namespace ToDoList.Data.Migrations
+namespace ToDoList.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot
@@ -219,7 +219,7 @@ namespace ToDoList.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("ToDoList.Models.List", b =>
+            modelBuilder.Entity("ToDoList.Models.TDList", b =>
                 {
                     b.Property<int>("ListId")
                         .ValueGeneratedOnAdd()
@@ -238,10 +238,10 @@ namespace ToDoList.Data.Migrations
 
                     b.HasIndex("TaskId");
 
-                    b.ToTable("Lists");
+                    b.ToTable("TDLists");
                 });
 
-            modelBuilder.Entity("ToDoList.Task", b =>
+            modelBuilder.Entity("ToDoList.TDTask", b =>
                 {
                     b.Property<int>("TaskId")
                         .ValueGeneratedOnAdd()
@@ -263,7 +263,7 @@ namespace ToDoList.Data.Migrations
 
                     b.HasKey("TaskId");
 
-                    b.ToTable("Tasks");
+                    b.ToTable("TDTasks");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -317,9 +317,9 @@ namespace ToDoList.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("ToDoList.Models.List", b =>
+            modelBuilder.Entity("ToDoList.Models.TDList", b =>
                 {
-                    b.HasOne("ToDoList.Task", null)
+                    b.HasOne("ToDoList.TDTask", null)
                         .WithMany()
                         .HasForeignKey("TaskId")
                         .OnDelete(DeleteBehavior.Cascade)
