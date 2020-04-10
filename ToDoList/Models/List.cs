@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace ToDoList.Models
 {
-    public class ToDoList
+    /// <summary>
+    /// Represents a complete ToDo List
+    /// </summary>
+    public class List
     {
         /// <summary>
         /// Unique id for the todo list
