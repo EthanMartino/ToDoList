@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ToDoList.Data;
 
-namespace ToDoList.Data.Migrations
+namespace ToDoList.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200410202918_AddedInitialMigration")]
+    partial class AddedInitialMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -219,7 +221,7 @@ namespace ToDoList.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("ToDoList.Models.List", b =>
+            modelBuilder.Entity("ToDoList.Models.TDList", b =>
                 {
                     b.Property<int>("ListId")
                         .ValueGeneratedOnAdd()
@@ -317,7 +319,7 @@ namespace ToDoList.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("ToDoList.Models.List", b =>
+            modelBuilder.Entity("ToDoList.Models.TDList", b =>
                 {
                     b.HasOne("ToDoList.Task", null)
                         .WithMany()
