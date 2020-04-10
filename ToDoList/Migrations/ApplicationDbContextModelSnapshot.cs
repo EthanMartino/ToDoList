@@ -238,10 +238,10 @@ namespace ToDoList.Migrations
 
                     b.HasIndex("TaskId");
 
-                    b.ToTable("Lists");
+                    b.ToTable("TDLists");
                 });
 
-            modelBuilder.Entity("ToDoList.Task", b =>
+            modelBuilder.Entity("ToDoList.TDTask", b =>
                 {
                     b.Property<int>("TaskId")
                         .ValueGeneratedOnAdd()
@@ -263,7 +263,7 @@ namespace ToDoList.Migrations
 
                     b.HasKey("TaskId");
 
-                    b.ToTable("Tasks");
+                    b.ToTable("TDTasks");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -319,7 +319,7 @@ namespace ToDoList.Migrations
 
             modelBuilder.Entity("ToDoList.Models.TDList", b =>
                 {
-                    b.HasOne("ToDoList.Task", null)
+                    b.HasOne("ToDoList.TDTask", null)
                         .WithMany()
                         .HasForeignKey("TaskId")
                         .OnDelete(DeleteBehavior.Cascade)
