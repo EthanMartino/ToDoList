@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -16,6 +17,15 @@ namespace ToDoList.Models
         /// </summary>
         [Key, Required]
         public int ListId { get; set; }
+
+        /// <summary>
+        /// Foreign Key to IdentityUser Id
+        /// Note: Since this is a froeign key from an Identity, 
+        /// it auto creates the migration with this property as a foreign key.
+        /// No need to do the modelBuilder to make it a foreign key.
+        /// </summary>
+        [Required]
+        public IdentityUser Id { get; set; }
 
         /// <summary>
         /// Foreign key to Task model
