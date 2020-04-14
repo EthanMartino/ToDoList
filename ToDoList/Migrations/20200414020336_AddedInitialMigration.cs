@@ -173,12 +173,19 @@ namespace ToDoList.Migrations
                 {
                     ListId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    Id1 = table.Column<string>(nullable: false),
                     TaskId = table.Column<int>(nullable: false),
                     ListTitle = table.Column<string>(maxLength: 50, nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_TDLists", x => x.ListId);
+                    table.ForeignKey(
+                        name: "FK_TDLists_AspNetUsers_Id1",
+                        column: x => x.Id1,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_TDLists_TDTasks_TaskId",
                         column: x => x.TaskId,
@@ -225,6 +232,11 @@ namespace ToDoList.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TDLists_Id1",
+                table: "TDLists",
+                column: "Id1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_TDLists_TaskId",
