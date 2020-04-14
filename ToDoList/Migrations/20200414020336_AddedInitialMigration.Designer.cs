@@ -10,7 +10,7 @@ using ToDoList.Data;
 namespace ToDoList.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200410203316_AddedInitialMigration")]
+    [Migration("20200414020336_AddedInitialMigration")]
     partial class AddedInitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -228,6 +228,10 @@ namespace ToDoList.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Id1")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("ListTitle")
                         .IsRequired()
                         .HasColumnType("nvarchar(50)")
@@ -237,6 +241,8 @@ namespace ToDoList.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("ListId");
+
+                    b.HasIndex("Id1");
 
                     b.HasIndex("TaskId");
 
@@ -321,6 +327,12 @@ namespace ToDoList.Migrations
 
             modelBuilder.Entity("ToDoList.Models.TDList", b =>
                 {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "Id")
+                        .WithMany()
+                        .HasForeignKey("Id1")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("ToDoList.TDTask", null)
                         .WithMany()
                         .HasForeignKey("TaskId")
