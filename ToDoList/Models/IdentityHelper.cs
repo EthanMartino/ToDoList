@@ -20,6 +20,12 @@ namespace ToDoList.Models
             options.Password.RequireUppercase = false;
             options.Password.RequiredLength = 8;
             options.Password.RequireNonAlphanumeric = false; //Special characters
+
+            //Set the lockout time
+            options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(15);
+
+            //Set how many passwords the user can try before they get locked out
+            options.Lockout.MaxFailedAccessAttempts = 3;
         }
     }
 }
