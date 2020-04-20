@@ -21,10 +21,10 @@ namespace ToDoList.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<TDList>() //Dependent entity
-                        .HasOne<TDTask>() //Parent Entity
+            modelBuilder.Entity<TDTask>() //Dependent entity
+                        .HasOne<TDList>() //Parent Entity
                         .WithMany()
-                        .HasForeignKey(task => task.TaskId); //The foreign key that you want to set up as from the Task.cs class
+                        .HasForeignKey(list => list.ListId); //The foreign key that you want to set up as from the TDList.cs class
         }
     }
 }
