@@ -1,0 +1,37 @@
+﻿@using Microsoft.AspNetCore.Identity;
+@model TDList
+
+@{
+    ViewData["Title"] = "CreateTodoList";
+
+    bool isUserLoggedIn = User.Identity.IsAuthenticated;
+}
+
+<h1>Create Todo List</h1>
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="CreateTodoList">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            @if (isUserLoggedIn == true)@* If a user is logged in, link the list to their account *@
+            {
+                <input asp-for="UserId" value="@ViewData["UserId"]" />
+            }
+
+            <div class="form-group">
+                <label asp-for="ListTitle" class="control-label"></label>
+                <input asp-for="ListTitle" class="form-control" />
+                <span asp-validation-for="ListTitle" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Add List" class="btn btn-primary" /> |
+                <a asp-action="Index">Back to Home</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
