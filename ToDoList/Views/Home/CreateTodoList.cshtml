@@ -16,7 +16,7 @@
 
             @if (isUserLoggedIn == true)@* If a user is logged in, link the list to their account *@
             {
-                <input asp-for="UserId" value="@ViewData["UserId"]" />
+                <input type="hidden" asp-for="UserId" value="@ViewData["UserId"]" />
             }
 
             <div class="form-group">
