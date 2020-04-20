@@ -17,6 +17,12 @@ namespace ToDoList
         /// </summary>
         public int TaskId { get; set; }
 
+        /// <summary>
+        /// Foreign key to TDList's id property
+        /// </summary>
+        [Required]
+        public int ListId { get; set; }
+
         [StringLength(50), Required, Display(Name = "Task")]
         /// <summary>
         /// The name of the Task
