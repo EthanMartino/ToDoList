@@ -47,6 +47,20 @@ namespace ToDoList.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "TDLists",
+                columns: table => new
+                {
+                    ListId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<string>(maxLength: 450, nullable: true),
+                    ListTitle = table.Column<string>(maxLength: 50, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TDLists", x => x.ListId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -153,26 +167,6 @@ namespace ToDoList.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "TDLists",
-                columns: table => new
-                {
-                    ListId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Id1 = table.Column<string>(nullable: true),
-                    ListTitle = table.Column<string>(maxLength: 50, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_TDLists", x => x.ListId);
-                    table.ForeignKey(
-                        name: "FK_TDLists_AspNetUsers_Id1",
-                        column: x => x.Id1,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "TDTasks",
                 columns: table => new
                 {
@@ -234,11 +228,6 @@ namespace ToDoList.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TDLists_Id1",
-                table: "TDLists",
-                column: "Id1");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_TDTasks_ListId",
                 table: "TDTasks",
                 column: "ListId");
@@ -268,10 +257,10 @@ namespace ToDoList.Migrations
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "TDLists");
+                name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
+                name: "TDLists");
         }
     }
 }

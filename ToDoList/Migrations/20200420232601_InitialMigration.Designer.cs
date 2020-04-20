@@ -10,7 +10,7 @@ using ToDoList.Data;
 namespace ToDoList.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200420172115_InitialMigration")]
+    [Migration("20200420232601_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -228,17 +228,16 @@ namespace ToDoList.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Id1")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("ListTitle")
                         .IsRequired()
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
 
-                    b.HasKey("ListId");
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)")
+                        .HasMaxLength(450);
 
-                    b.HasIndex("Id1");
+                    b.HasKey("ListId");
 
                     b.ToTable("TDLists");
                 });
@@ -322,13 +321,6 @@ namespace ToDoList.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("ToDoList.Models.TDList", b =>
-                {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "Id")
-                        .WithMany()
-                        .HasForeignKey("Id1");
                 });
 
             modelBuilder.Entity("ToDoList.TDTask", b =>
