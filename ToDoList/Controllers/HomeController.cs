@@ -51,6 +51,14 @@ namespace ToDoList.Controllers
             return View();
         }
 
+        [HttpGet]
+        public IActionResult ViewAllToDoLists()
+        {
+            string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            ViewData["UserId"] = userId;
+            return View();
+        }
+
         public IActionResult Privacy()
         {
             return View();
