@@ -55,8 +55,9 @@ namespace ToDoList.Controllers
         public async Task<IActionResult> ViewAllToDoLists()
         {
             string userName = User.FindFirstValue(ClaimTypes.Name);
+            string userId = User.FindFirstValue(ClaimTypes.NameIdentifier); //For use in the DB helper method once updated
             ViewData["UserName"] = userName;
-            List<TDList> lists = await TDListDb.GetAllToDoLists(_context);
+            List<TDList> lists = await TDListDb.GetAllToDoLists(_context); //Needs to be changed once the TDListDb class is updated
             return View(lists);
         }
 
