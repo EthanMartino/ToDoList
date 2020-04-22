@@ -52,11 +52,12 @@ namespace ToDoList.Controllers
         }
 
         [HttpGet]
-        public IActionResult ViewAllToDoLists()
+        public async Task<IActionResult> ViewAllToDoLists()
         {
-            string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            ViewData["UserId"] = userId;
-            return View();
+            string userName = User.FindFirstValue(ClaimTypes.Name);
+            ViewData["UserName"] = userName;
+            List<TDList> lists = await TDListDb.GetAllToDoLists(_context);
+            return View(lists);
         }
 
         public IActionResult Privacy()
