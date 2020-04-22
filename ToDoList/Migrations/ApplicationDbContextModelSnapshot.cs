@@ -226,23 +226,16 @@ namespace ToDoList.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Id1")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("ListTitle")
                         .IsRequired()
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
 
-                    b.Property<int>("TaskId")
-                        .HasColumnType("int");
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)")
+                        .HasMaxLength(450);
 
                     b.HasKey("ListId");
-
-                    b.HasIndex("Id1");
-
-                    b.HasIndex("TaskId");
 
                     b.ToTable("TDLists");
                 });
@@ -262,12 +255,17 @@ namespace ToDoList.Migrations
                         .HasColumnType("nvarchar(20)")
                         .HasMaxLength(20);
 
+                    b.Property<int>("ListId")
+                        .HasColumnType("int");
+
                     b.Property<string>("TaskTitle")
                         .IsRequired()
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
 
                     b.HasKey("TaskId");
+
+                    b.HasIndex("ListId");
 
                     b.ToTable("TDTasks");
                 });
@@ -323,17 +321,11 @@ namespace ToDoList.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("ToDoList.Models.TDList", b =>
+            modelBuilder.Entity("ToDoList.TDTask", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "Id")
+                    b.HasOne("ToDoList.Models.TDList", null)
                         .WithMany()
-                        .HasForeignKey("Id1")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ToDoList.TDTask", null)
-                        .WithMany()
-                        .HasForeignKey("TaskId")
+                        .HasForeignKey("ListId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

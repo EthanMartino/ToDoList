@@ -5,6 +5,13 @@
     <UserSecretsId>aspnet-ToDoList-24B7D8FC-BB2C-4C21-95D3-0D93097BE296</UserSecretsId>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Migrations\20200420172115_InitialMigration.cs" />
+    <Compile Remove="Migrations\20200420172115_InitialMigration.Designer.cs" />
+    <Compile Remove="Migrations\20200420232200_InitialMigration.cs" />
+    <Compile Remove="Migrations\20200420232200_InitialMigration.Designer.cs" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.1" />
