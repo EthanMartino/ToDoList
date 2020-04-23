@@ -1,4 +1,6 @@
-﻿@{
+﻿@using System.Security.Claims;
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
@@ -14,6 +16,6 @@
     <a class="btn btn-primary" asp-action="CreateTodoList" asp-controller="Home">Create a ToDo List</a>
     @if (User.Identity.IsAuthenticated)
     {
-        <a class="btn btn-primary" asp-action="ViewAllToDoLists" asp-controller="Home">View ToDo Lists</a>
+        <a class="btn btn-primary" asp-action="ViewAllToDoLists" asp-controller="Home" asp-route-userId="@User.FindFirstValue(ClaimTypes.NameIdentifier)">View ToDo Lists</a>
     }
 </div>
