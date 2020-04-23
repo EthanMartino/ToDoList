@@ -14,9 +14,10 @@ namespace ToDoList.Data
         /// </summary>
         /// <param name="context"></param>
         /// <returns></returns>
-        public static async Task<List<TDList>> GetAllToDoLists(ApplicationDbContext context) 
+        public static async Task<List<TDList>> GetAllToDoListsById(ApplicationDbContext context, string userId) 
         {
             List<TDList> lists = await (from l in context.TDLists
+                                        where l.UserId == userId
                                         orderby l.ListId ascending
                                         select l).ToListAsync();
             return lists;

@@ -19,10 +19,13 @@ namespace ToDoList.Controllers
         //Field to access the database anywhere in the class
         private readonly ApplicationDbContext _context;
 
-        public HomeController(ILogger<HomeController> logger, ApplicationDbContext context)
+        private readonly UserManager<IdentityUser> _userManager;
+
+        public HomeController(ILogger<HomeController> logger, ApplicationDbContext context, UserManager<IdentityUser> userManager)
         {
             _logger = logger;
             _context = context;
+            _userManager = userManager;
         }
 
         public IActionResult Index()
@@ -52,13 +55,11 @@ namespace ToDoList.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> ViewAllToDoLists()
+        public async Task<IActionResult> ViewAllToDoLists(string userId)
         {
-            string userName = User.FindFirstValue(ClaimTypes.Name);
-            string userId = User.FindFirstValue(ClaimTypes.NameIdentifier); //For use in the DB helper method once updated
-            ViewData["UserName"] = userName;
-            List<TDList> lists = await TDListDb.GetAllToDoLists(_context); //Needs to be changed once the TDListDb class is updated
-            return View(lists);
+            IdentityUser currentUser = await _userManager.FindByIdAsync(userId);
+            ViewBag.UserTDLists = await TDListDb.GetAllToDoListsById(_context, userId);
+            return View(currentUser);        
         }
 
         public IActionResult Privacy()

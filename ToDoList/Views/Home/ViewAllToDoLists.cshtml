@@ -1,32 +1,27 @@
-﻿@model IEnumerable<ToDoList.Models.TDList>
+﻿@model Microsoft.AspNetCore.Identity.IdentityUser
 
 @{
     ViewData["Title"] = "ToDo Lists";
 }
 
-    <h1>@ViewData["UserName"]'s ToDo Lists</h1>
+<h1>@Model.UserName's ToDo Lists</h1>
 
 <table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.ListTitle)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
     <tbody>
-@foreach (TDList item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.ListTitle)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.ListId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ListId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ListId">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (TDList item in ViewBag.UserTDLists)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ListTitle)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.ListId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.ListId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.ListId">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+
+<a asp-action="Index">Back to Home</a>
