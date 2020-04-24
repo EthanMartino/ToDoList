@@ -62,6 +62,26 @@ namespace ToDoList.Controllers
             return View(currentUser);        
         }
 
+        [HttpGet]
+        public async Task<IActionResult> DeleteToDoList(int id) 
+        {
+            TDList list = await TDListDb.GetToDoListById(_context, id);
+            if (list == null) 
+            {
+                return NotFound();
+            }
+            return View(list);
+        }
+
+        [HttpPost, ActionName("DeleteToDoList")]
+        public async Task<IActionResult> DeleteToDoListConfirmed(int id) 
+        {
+            TDList list = await TDListDb.GetToDoListById(_context, id);
+            await TDListDb.DeleteToDoList(_context, list);
+            TempData["Message"] = $"{list.ListTitle} list deleted successfully";
+            return RedirectToAction(nameof(Index));
+        }
+
         public IActionResult Privacy()
         {
             return View();
