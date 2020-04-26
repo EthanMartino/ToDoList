@@ -6,6 +6,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Logging;
 using ToDoList.Data;
 using ToDoList.Models;
@@ -49,9 +50,30 @@ namespace ToDoList.Controllers
             {
                 await TDListDb.AddToDoList(_context, list);
                 TempData["Message"] = $"{list.ListTitle} added successfully";
-                return RedirectToAction(nameof(Index));
+
+                //Redirect the user to their newly created list's details page
+                return RedirectToAction(nameof(Details), new RouteValueDictionary(new { action = "Details", Id = list.ListId}));
             }
             return View();
+        }
+
+        public async Task<IActionResult> Details(int id) 
+        {
+            TDList list = await TDListDb.GetToDoListById(_context, id);
+            ViewData["ListTitle"] = list.ListTitle;
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult AddTask() 
+        {
+            throw new NotImplementedException();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddTask(TDTask task) 
+        {
+            throw new NotImplementedException();
         }
 
         [HttpGet]
