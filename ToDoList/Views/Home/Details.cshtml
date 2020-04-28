@@ -3,8 +3,16 @@
 @{
     ViewData["Title"] = "Details";
 
-    //Uncomment once adding a task has been implemented
-    //int index = 0;
+    //Index variable to differentiate each accordion item
+    int index = 0;
+}
+
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        @TempData["Message"]
+    </div>
 }
 
 <div class="text-center">
@@ -12,12 +20,11 @@
 </div>
 
 <div class="text-center">
-    <a class="btn btn-primary" asp-action="AddTask" asp-controller="Home">Add Task</a>
+    <a class="btn btn-primary" asp-action="AddTask" asp-controller="Home" asp-route-listId="@ViewData["ListId"]">Add Task</a>
 </div>
 
-@* Uncomment once adding a task has been implemented *@
-
-@*<div class="accordion" id="ListTasks">
+@* Display tasks tied to that current list, if any *@
+<div class="accordion" id="ListTasks">
     @foreach (TDTask item in ViewBag.Tasks)
     {
         <div class="card">
@@ -32,16 +39,38 @@
                 </h2>
             </div>
             <div id="collapse_@index" class="collapse" aria-labelledby="heading_@index" data-parent="#ListTasks">
-                <div class="card-body text-dark">
-                    @item.Description
-                </div>
+                @if (item.Description != null)
+                {
+                    <div class="card-body text-dark">
+                        Description: @item.Description
+                    </div>
+                }
+                else
+                {
+                    <div class="card-body text-dark">
+                        Description: No description is specified
+                    </div>
+                }
+                @if (item.DueDate != null)
+                {
+                    <div class="card-body text-dark">
+                        Due Date: @item.DueDate
+                    </div>
+                }
+                else
+                {
+                    <div class="card-body text-dark">
+                        Due Date: No due date specified
+                    </div>
+                }
             </div>
         </div>
 
         index++;
     }
-</div>*@
+</div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Back to Home</a>
 </div>
+
