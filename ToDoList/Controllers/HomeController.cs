@@ -104,6 +104,25 @@ namespace ToDoList.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [HttpGet]
+        public async Task<IActionResult> EditToDoList(int id)
+        {
+            TDList list = await TDListDb.GetToDoListById(_context, id);
+            if (list == null)
+            {
+                return NotFound();
+            }
+            return View(list);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditToDoList(TDList list)
+        {
+            await TDListDb.UpdateToDoList(_context, list);
+            TempData["Message"] = $"Name changed successfully";
+            return RedirectToAction(nameof(Index));
+        }
+
         public IActionResult Privacy()
         {
             return View();
