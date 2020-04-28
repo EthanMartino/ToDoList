@@ -12,14 +12,15 @@ namespace ToDoList.Data
     public static class TaskDb
     {
         /// <summary>
-        /// Gets all TDTasks from the database
+        /// Gets all of the TDTasks of the given list id from the database 
         /// </summary>
         /// <param name="context"></param>
         /// <returns></returns>
-        public static async Task<List<TDTask>> GetAllTasks(ApplicationDbContext context)
+        public static async Task<List<TDTask>> GetAllTasksByListId(int listId, ApplicationDbContext context)
         {
             List<TDTask> tasks =
                  await (from t in context.TDTasks
+                        where t.ListId == listId
                         orderby t.TaskId ascending
                         select t).ToListAsync();
 
