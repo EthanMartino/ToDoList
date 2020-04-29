@@ -119,7 +119,7 @@ namespace ToDoList.Controllers
         public async Task<IActionResult> EditToDoList(TDList list)
         {
             await TDListDb.UpdateToDoList(_context, list);
-            TempData["Message"] = $"Name changed successfully";
+            TempData["Message"] = "Name changed successfully";
             return RedirectToAction(nameof(Index));
         }
 
