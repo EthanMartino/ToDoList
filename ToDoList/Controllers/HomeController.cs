@@ -60,20 +60,28 @@ namespace ToDoList.Controllers
         public async Task<IActionResult> Details(int id) 
         {
             TDList list = await TDListDb.GetToDoListById(_context, id);
+            ViewBag.Tasks = await TaskDb.GetAllTasksByListId(list.ListId, _context);
             ViewData["ListTitle"] = list.ListTitle;
+            ViewData["ListId"] = list.ListId;
             return View();
         }
 
         [HttpGet]
-        public IActionResult AddTask() 
+        public IActionResult AddTask(int listId) 
         {
-            throw new NotImplementedException();
+            return View();
         }
 
         [HttpPost]
         public async Task<IActionResult> AddTask(TDTask task) 
         {
-            throw new NotImplementedException();
+            if (ModelState.IsValid) 
+            {
+                await TaskDb.AddTask(task, _context);
+                TempData["Message"] = $"{task.TaskTitle} task added successfully";
+                return RedirectToAction(nameof(Details), new RouteValueDictionary(new { action = "Details", Id = task.ListId}));
+            }
+            return View();
         }
 
         [HttpGet]
