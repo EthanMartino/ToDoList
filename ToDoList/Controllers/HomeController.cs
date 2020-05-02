@@ -85,6 +85,25 @@ namespace ToDoList.Controllers
         }
 
         [HttpGet]
+        public async Task<IActionResult> DeleteTask(int id)
+        {
+            TDTask task = await TaskDb.GetTaskById(id, _context);
+            if (task == null)
+            {
+                return NotFound();
+            }
+            return View(task);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteTask(TDTask task)
+        {
+            await TaskDb.DeleteTask(task, _context);
+            TempData["Message"] = $"{task.TaskTitle} task deleted successfully";
+            return RedirectToAction(nameof(ViewAllToDoLists));
+        }
+
+        [HttpGet]
         public async Task<IActionResult> ViewAllToDoLists(string userId)
         {
             IdentityUser currentUser = await _userManager.FindByIdAsync(userId);
