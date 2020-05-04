@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using ToDoList.Data;
 using ToDoList.Models;
@@ -80,6 +81,25 @@ namespace ToDoList.Controllers
                 await TaskDb.AddTask(task, _context);
                 TempData["Message"] = $"{task.TaskTitle} task added successfully";
                 return RedirectToAction(nameof(Details), new RouteValueDictionary(new { action = "Details", Id = task.ListId}));
+            }
+            return View();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> EditTask(int id) 
+        {
+            TDTask task = await TaskDb.GetTaskById(id, _context);
+            return View(task);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditTask(TDTask task) 
+        {
+            if (ModelState.IsValid) 
+            {
+                await TaskDb.UpdateTask(task, _context);
+                TempData["Message"] = $"{task.TaskTitle} edited successfully";
+                return RedirectToAction(nameof(Details), new RouteValueDictionary(new { action = "Details", Id = task.ListId }));
             }
             return View();
         }
