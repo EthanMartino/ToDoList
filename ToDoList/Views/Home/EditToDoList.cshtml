@@ -12,6 +12,7 @@
         <form asp-action="EditToDoList">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="ListId" />
+            <input type="hidden" asp-for="UserId" />
             <div class="form-group">
                 <label asp-for="ListTitle" class="control-label"></label>
                 <input asp-for="ListTitle" class="form-control" />
@@ -25,7 +26,7 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Back to Home</a>
 </div>
 
 @section Scripts {

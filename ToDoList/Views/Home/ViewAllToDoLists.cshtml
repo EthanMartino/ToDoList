@@ -15,7 +15,7 @@
                     @Html.DisplayFor(modelItem => item.ListTitle)
                 </td>
                 <td>
-                    <a asp-action="EditToDoList" asp-route-id="@item.ListId">Edit Name</a> |
+                    <a asp-action="EditToDoList" asp-route-id="@item.ListId" asp-route-userId="@item.UserId">Edit Name</a> |
                     <a asp-action="Details" asp-route-id="@item.ListId">Details</a> |
                     <a asp-action="DeleteToDoList" asp-route-id="@item.ListId">Delete</a>
                 </td>

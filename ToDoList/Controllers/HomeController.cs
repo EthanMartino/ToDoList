@@ -154,8 +154,9 @@ namespace ToDoList.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> EditToDoList(int id)
+        public async Task<IActionResult> EditToDoList(int id, int userId)
         {
+            ViewData["UserId"] = userId;
             TDList list = await TDListDb.GetToDoListById(_context, id);
             if (list == null)
             {
