@@ -17,6 +17,9 @@
             <td>
                 <a class="btn btn-danger text-dark" asp-action="DeleteTask" asp-controller="Home" asp-route-id="@task.TaskId">Delete</a>
             </td>
+            <td>
+                <a class="btn btn-warning text-dark float-right" asp-action="UndoCompletedTask" asp-controller="Home" asp-route-id="@task.TaskId">Undo Completion</a>
+            </td>
         </tr>
     }
 }
