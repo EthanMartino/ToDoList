@@ -67,13 +67,13 @@ namespace ToDoList.Controllers
             return View();
         }
 
-        public async Task<IActionResult> ViewCompletedTasks(int id, int listId)
+        public async Task<IActionResult> ViewCompletedTasks(int id)
         {
             TDTask task = await TaskDb.GetTaskById(id, _context);
             task.isCompleted = true;
             await TaskDb.UpdateTask(task, _context);
 
-            return RedirectToAction(nameof(Details), new RouteValueDictionary(new { action = "Details", Id = listId }));
+            return RedirectToAction(nameof(Details), new RouteValueDictionary(new { action = "Details", Id = task.ListId }));
         }
 
         [HttpGet]

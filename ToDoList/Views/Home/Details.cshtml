@@ -38,7 +38,7 @@
 
                         <a class="btn btn-success text-dark" asp-action="EditTask" asp-controller="Home" asp-route-id="@item.TaskId">Edit</a>
                         <a class="btn btn-danger text-dark" asp-action="DeleteTask" asp-controller="Home" asp-route-id="@item.TaskId">Delete</a>
-                        <a class="btn btn-info text-light float-right" asp-action="ViewCompletedTasks" asp-controller="Home" asp-route-id="@item.TaskId" asp-route-listId="@ViewData["ListId"]">Complete</a>
+                        <a class="btn btn-info text-light float-right" asp-action="ViewCompletedTasks" asp-controller="Home" asp-route-id="@item.TaskId">Complete</a>
                     </h2>
                 </div>
                 <div id="collapse_@index" class="collapse" aria-labelledby="heading_@index" data-parent="#ListTasks">
