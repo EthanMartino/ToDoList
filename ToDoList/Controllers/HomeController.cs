@@ -76,6 +76,14 @@ namespace ToDoList.Controllers
             return RedirectToAction(nameof(Details), new RouteValueDictionary(new { action = "Details", Id = task.ListId }));
         }
 
+        public async Task<IActionResult> UndoCompletedTask(int id) 
+        {
+            TDTask task = await TaskDb.GetTaskById(id, _context);
+            task.isCompleted = false;
+            await TaskDb.UpdateTask(task, _context);
+            return RedirectToAction(nameof(Details), new RouteValueDictionary(new { action = "Details", Id = task.ListId }));
+        }
+
         [HttpGet]
         public IActionResult AddTask(int listId) 
         {
