@@ -1,0 +1,24 @@
+﻿@model TDTask
+
+<h3>Completed Tasks</h3>
+<table class="table">
+    <tbody>
+@foreach (TDTask task in ViewBag.Tasks) {
+    if (task.isCompleted)
+    {
+
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => task.TaskTitle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => task.Description)
+            </td>
+            <td>
+                <a class="btn btn-danger text-dark" asp-action="DeleteTask" asp-controller="Home" asp-route-id="@task.TaskId">Delete</a>
+            </td>
+        </tr>
+    }
+}
+    </tbody>
+</table>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
@@ -40,5 +41,11 @@ namespace ToDoList
         /// The expected Date for the Task to be finished
         /// </summary>
         public string DueDate { get; set; }
+
+        [DefaultValue(false)]
+        /// <summary>
+        /// Represents whether or not the Task is completed
+        /// </summary>
+        public bool isCompleted { get; set; }
     }
 }
