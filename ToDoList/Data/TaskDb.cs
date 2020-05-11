@@ -82,5 +82,18 @@ namespace ToDoList.Data
             context.Entry(task).State = EntityState.Deleted;
             await context.SaveChangesAsync();
         }
+
+        public static async Task DeleteAllCompletedTasks(List<TDTask> tasks, ApplicationDbContext context) 
+        {
+            foreach (TDTask item in tasks) 
+            {
+                if (item.isCompleted) 
+                {
+                    await context.AddAsync(item);
+                    context.Entry(item).State = EntityState.Deleted;
+                    await context.SaveChangesAsync();
+                }
+            }
+        }
     }
 }
