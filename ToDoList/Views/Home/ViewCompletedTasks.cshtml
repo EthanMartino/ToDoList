@@ -1,12 +1,17 @@
 ﻿@model TDTask
 
-<h3>Completed Tasks</h3>
+<h3>
+    Completed Tasks
+    @*<a class="btn btn-success float-right" asp-action="DeleteAllCompletedTasks" asp-controller="Home" asp-route-listId="@Model.ListId">Delete All Completed Tasks</a>*@
+    <button type="button" class="btn btn-success float-right" data-toggle="modal" data-target="#deleteAllCompletedTasks">
+        Delete All Completed Tasks
+    </button>
+</h3>
 <table class="table">
     <tbody>
 @foreach (TDTask task in ViewBag.Tasks) {
     if (task.isCompleted)
     {
-
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => task.TaskTitle)
@@ -25,3 +30,25 @@
 }
     </tbody>
 </table>
+
+<div class="modal fade" id="deleteAllCompletedTasks" tabindex="-1" role="dialog" aria-labelledby="deleteAllCompletedTasksLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteAllCompletedTaskslLabel">Are you sure?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Deleting all completed tasks cannot be undone!
+            </div>
+            <div class="modal-footer">
+                <form asp-action="DeleteAllCompletedTasks" asp-controller="Home" asp-route-listId="@ViewData["ListId"]" method="post" role="form">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Delete All</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
