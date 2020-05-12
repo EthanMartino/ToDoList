@@ -70,10 +70,20 @@ namespace ToDoList.Controllers
         public async Task<IActionResult> ViewCompletedTasks(int id)
         {
             TDTask task = await TaskDb.GetTaskById(id, _context);
+            ViewData["ListId"] = task.ListId;
             task.isCompleted = true;
             await TaskDb.UpdateTask(task, _context);
 
             return RedirectToAction(nameof(Details), new RouteValueDictionary(new { action = "Details", Id = task.ListId }));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteAllCompletedTasks(int listId)
+        {
+            //TDList list = await TDListDb.GetToDoListById(_context, listId);
+            List<TDTask> tasks = await TaskDb.GetAllTasksByListId(listId, _context);
+            await TaskDb.DeleteAllCompletedTasks(tasks, _context);
+            return RedirectToAction(nameof(Details), new RouteValueDictionary(new { action = "Details", Id = listId }));
         }
 
         public async Task<IActionResult> UndoCompletedTask(int id) 
