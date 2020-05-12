@@ -76,5 +76,19 @@ namespace ToDoList.Data
             context.Entry(list).State = EntityState.Deleted;
             await context.SaveChangesAsync();
         }
+
+        public static async Task DeleteListsWithoutUserId(ApplicationDbContext context) 
+        {
+            List<TDList> lists = await (from l in context.TDLists
+                                        where l.UserId == null
+                                        select l).ToListAsync();
+
+            foreach (TDList item in lists) 
+            {
+                await context.AddAsync(item);
+                context.Entry(item).State = EntityState.Deleted;
+                await context.SaveChangesAsync();
+            }
+        }
     }
 }
