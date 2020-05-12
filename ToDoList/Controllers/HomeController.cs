@@ -200,6 +200,12 @@ namespace ToDoList.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        public async Task<IActionResult> DeleteUnregisteredLists() 
+        {
+            await TDListDb.DeleteListsWithoutUserId(_context);
+            return RedirectToAction(nameof(Index));
+        }
+
         public IActionResult Privacy()
         {
             return View();
