@@ -19,3 +19,13 @@
         <a class="btn btn-primary" asp-action="ViewAllToDoLists" asp-controller="Home" asp-route-userId="@User.FindFirstValue(ClaimTypes.NameIdentifier)">View ToDo Lists</a>
     }
 </div>
+
+<a id="deleteAllLists" asp-action="DeleteUnregisteredLists" asp-controller="Home"></a>
+
+<script>
+    function deleteLists() {
+        document.getElementById("deleteAllLists").click();
+    }
+
+    setTimeout(function () { deleteLists(); }, 86400); //86400 is 24 hours
+</script>
