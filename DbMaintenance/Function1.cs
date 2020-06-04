@@ -1,6 +1,9 @@
 using Microsoft.Azure.WebJobs;
 using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using System;
+using System.IO;
 
 namespace DbMaintenance
 {
@@ -11,8 +14,9 @@ namespace DbMaintenance
         {
             //TimerTrigger documentation: https://docs.microsoft.com/en-us/azure/azure-functions/functions-bindings-timer?tabs=csharp
 
-            //Get the connection string from a setting file or environment variable before publishing the site
-            string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=ToDoListDb;Integrated Security=True;"; //Placeholder
+            ConnectionStringManager connectionStringManager = new ConnectionStringManager();
+            var connectionString = connectionStringManager.GetConnectionString();
+
             using (SqlConnection con = new SqlConnection(connectionString)) 
             {
                 await con.OpenAsync();
@@ -27,6 +31,15 @@ namespace DbMaintenance
                 }
 
                 await con.DisposeAsync();
+            }
+        }
+
+        public class ConnectionStringManager 
+        {
+            public string GetConnectionString() 
+            {
+                var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+                return builder.Build().GetSection("ConnectionStrings").GetSection("DefaultConnection").Value;
             }
         }
     }
