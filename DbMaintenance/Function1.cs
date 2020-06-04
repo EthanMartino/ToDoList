@@ -11,8 +11,8 @@ namespace DbMaintenance
         {
             //TimerTrigger documentation: https://docs.microsoft.com/en-us/azure/azure-functions/functions-bindings-timer?tabs=csharp
 
-            //Replace connection string with the one in Azure SQL Database, if published
-            string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=ToDoListDb;Integrated Security=True;";
+            //Get the connection string from a setting file or environment variable before publishing the site
+            string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=ToDoListDb;Integrated Security=True;"; //Placeholder
             using (SqlConnection con = new SqlConnection(connectionString)) 
             {
                 await con.OpenAsync();
@@ -22,7 +22,7 @@ namespace DbMaintenance
 
                 using (SqlCommand cmd = new SqlCommand(query, con)) 
                 {
-                    int rows = await cmd.ExecuteNonQueryAsync();
+                    await cmd.ExecuteNonQueryAsync();
                     log.LogInformation("Todo lists without a userId has been deleted");
                 }
 
