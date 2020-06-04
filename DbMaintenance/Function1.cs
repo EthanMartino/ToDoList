@@ -38,7 +38,8 @@ namespace DbMaintenance
         {
             public string GetConnectionString() 
             {
-                var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+                var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory())
+                                                        .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
                 return builder.Build().GetSection("ConnectionStrings").GetSection("DefaultConnection").Value;
             }
         }
