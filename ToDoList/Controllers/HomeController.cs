@@ -61,10 +61,19 @@ namespace ToDoList.Controllers
         public async Task<IActionResult> Details(int id) 
         {
             TDList list = await TDListDb.GetToDoListById(_context, id);
-            ViewBag.Tasks = await TaskDb.GetAllTasksByListId(list.ListId, _context);
-            ViewData["ListTitle"] = list.ListTitle;
-            ViewData["ListId"] = list.ListId;
-            return View();
+
+            if (list == null)
+            {
+                return NotFound();
+            }
+            else 
+            {
+                ViewBag.Tasks = await TaskDb.GetAllTasksByListId(list.ListId, _context);
+                ViewData["ListTitle"] = list.ListTitle;
+                ViewData["ListId"] = list.ListId;
+                return View();        
+            }
+
         }
 
         public async Task<IActionResult> ViewCompletedTasks(int id)
@@ -80,7 +89,6 @@ namespace ToDoList.Controllers
         [HttpPost]
         public async Task<IActionResult> DeleteAllCompletedTasks(int listId)
         {
-            //TDList list = await TDListDb.GetToDoListById(_context, listId);
             List<TDTask> tasks = await TaskDb.GetAllTasksByListId(listId, _context);
             await TaskDb.DeleteAllCompletedTasks(tasks, _context);
             return RedirectToAction(nameof(Details), new RouteValueDictionary(new { action = "Details", Id = listId }));
