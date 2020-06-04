@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29709.97
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDoList", "ToDoList\ToDoList.csproj", "{974AF2F3-418D-4AD3-9626-577D4E958752}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToDoList", "ToDoList\ToDoList.csproj", "{974AF2F3-418D-4AD3-9626-577D4E958752}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbMaintenance", "DbMaintenance\DbMaintenance.csproj", "{ACF0E05C-FEAA-43DE-9194-D3701F8965EC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{974AF2F3-418D-4AD3-9626-577D4E958752}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{974AF2F3-418D-4AD3-9626-577D4E958752}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{974AF2F3-418D-4AD3-9626-577D4E958752}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ACF0E05C-FEAA-43DE-9194-D3701F8965EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ACF0E05C-FEAA-43DE-9194-D3701F8965EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ACF0E05C-FEAA-43DE-9194-D3701F8965EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ACF0E05C-FEAA-43DE-9194-D3701F8965EC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
