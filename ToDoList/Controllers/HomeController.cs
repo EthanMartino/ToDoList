@@ -64,7 +64,7 @@ namespace ToDoList.Controllers
 
             if (list == null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Index));
             }
             else 
             {
@@ -111,6 +111,17 @@ namespace ToDoList.Controllers
         [HttpPost]
         public async Task<IActionResult> AddTask(TDTask task) 
         {
+            #region Unregistered Users
+            //Used to redirect users that have a current active todo list back to the home page. 
+            //Only if they still have the to do list up on the browser when Azure Functions performs a database wipe,
+            //and if they try to add a task.
+            var listId = await TaskDb.GetTaskListId(task, _context);
+            if (listId == null) 
+            {
+                return RedirectToAction(nameof(Details));
+            }
+            #endregion
+
             if (ModelState.IsValid) 
             {
                 await TaskDb.AddTask(task, _context);
