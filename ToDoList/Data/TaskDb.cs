@@ -83,6 +83,12 @@ namespace ToDoList.Data
             await context.SaveChangesAsync();
         }
 
+        /// <summary>
+        /// Deletes all completed task from the database
+        /// </summary>
+        /// <param name="tasks"></param>
+        /// <param name="context"></param>
+        /// <returns></returns>
         public static async Task DeleteAllCompletedTasks(List<TDTask> tasks, ApplicationDbContext context) 
         {
             foreach (TDTask item in tasks) 
@@ -94,6 +100,20 @@ namespace ToDoList.Data
                     await context.SaveChangesAsync();
                 }
             }
+        }
+
+        /// <summary>
+        /// Gets the task's listId from the database. Returns null if not no list is found.
+        /// </summary>
+        /// <param name="task"></param>
+        /// <param name="context"></param>
+        /// <returns></returns>
+        public static async Task<TDTask> GetTaskListId(TDTask task, ApplicationDbContext context) 
+        {
+            TDTask listId = await (from l in context.TDTasks
+                                where l.ListId == task.ListId
+                                select l).SingleOrDefaultAsync();
+            return listId;
         }
     }
 }
