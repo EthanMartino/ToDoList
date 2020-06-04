@@ -12,6 +12,14 @@
     </div>
 }
 
+@if (User.FindFirstValue(ClaimTypes.NameIdentifier) == null)
+{
+    <div class="text-center">
+        <h4>Note: Todo Lists created without an account will be deleted automatically after 24 hours.</h4>
+    </div>
+    <br />
+}
+
 <div class="text-center">
     <a class="btn btn-primary" asp-action="CreateTodoList" asp-controller="Home">Create a ToDo List</a>
     @if (User.Identity.IsAuthenticated)
